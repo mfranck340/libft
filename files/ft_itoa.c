@@ -6,7 +6,7 @@
 /*   By: ffierro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 00:07:36 by ffierro-          #+#    #+#             */
-/*   Updated: 2024/09/27 00:07:48 by ffierro-         ###   ########.fr       */
+/*   Updated: 2024/09/27 00:55:34 by ffierro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,11 @@ static int	count_digits(int n)
 	count = 0;
 	if (n <= 0)
 		count++;
-	while (n /= 10)
+	while (n != 0)
+	{
+		n /= 10;
 		count++;
+	}
 	return (count);
 }
 
