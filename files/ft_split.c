@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ffierro- <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/26 22:04:17 by ffierro-          #+#    #+#             */
+/*   Updated: 2024/09/26 22:09:17 by ffierro-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "stdlib.h"
 
 static int	count_words(char const *s, char c)
 {
@@ -20,12 +33,12 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-static int	save_memory(char *s, char c, char **strs, int j)
+static int	save_memory(char const *s, char c, char **strs, int j)
 {
 	int	k;
 
 	k = 0;
-	while (s[k] != '\0' && !s[k] == c)
+	while (s[k] != '\0' && !(s[k] == c))
 		k++;
 	strs[j] = (char *) malloc(sizeof(char) * (k + 1));
 	if (!strs[j])
@@ -50,12 +63,12 @@ static char	**split_strs(char const *s, char c, char **strs)
 	j = 0;
 	while (*s)
 	{
-		if (!*s == c)
+		if (!(*s == c))
 		{
 			if (!save_memory(s, c, strs, j))
 				return (0);
 			k = 0;
-			while (*s && !*s == c)
+			while (*s && !(*s == c))
 			{
 				strs[j][k] = *s++;
 				k++;
@@ -80,5 +93,5 @@ char	**ft_split(char const *s, char c)
 	if (!strs)
 		return (0);
 	strs[size] = 0;
-	return (!split_strs(s, c, strs, size));
+	return (split_strs(s, c, strs));
 }
