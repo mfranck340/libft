@@ -6,37 +6,43 @@
 /*   By: ffierro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:38:41 by ffierro-          #+#    #+#             */
-/*   Updated: 2024/09/27 11:38:44 by ffierro-         ###   ########.fr       */
+/*   Updated: 2024/09/28 00:46:40 by ffierro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static t_list	*free_memory(t_list *list, void (*del)(void *), void *tmp)
+{
+	ft_lstclear(&list, del);
+	del(tmp);
+	return (0);
+}
+
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*new_list;
-	t_list	*tmp;
 	t_list	*new_node;
+	t_list	*list;
+	void	*tmp;
 
-	if (!lst || !f)
+	if (!lst)
 		return (0);
-	new_list = ft_lstnew(f(lst->content));
-	if (!new_list)
+	tmp = f(lst->content);
+	list = ft_lstnew(tmp);
+	if (!list)
+	{
+		del(tmp);
 		return (0);
-	tmp = new_list;
+	}
 	lst = lst->next;
 	while (lst)
 	{
-		new_node = ft_lstnew(f(lst->content));
+		tmp = f(lst->content);
+		new_node = ft_lstnew(tmp);
 		if (!new_node)
-		{
-			ft_lstclear(&new_list, del);
-			return (0);
-		}
-		tmp->next = new_node;
-		tmp = tmp->next;
+			return (free_memory(list, del, tmp));
+		ft_lstadd_back(&list, new_node);
 		lst = lst->next;
 	}
-	return (new_list);
+	return (list);
 }
-
