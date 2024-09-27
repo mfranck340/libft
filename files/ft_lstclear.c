@@ -6,7 +6,7 @@
 /*   By: ffierro- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 11:38:06 by ffierro-          #+#    #+#             */
-/*   Updated: 2024/09/27 11:38:09 by ffierro-         ###   ########.fr       */
+/*   Updated: 2024/09/27 12:22:57 by ffierro-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 		while (temp)
 		{
 			next = temp->next;
-			ft_lsdetone(temp, del);
+			ft_lstdelone(temp, del);
 			temp = next;
 		}
 		*lst = 0;
