@@ -15,20 +15,20 @@
 static int	count_words(char const *s, char c)
 {
 	int		count;
-	int		e;
+	int		i;
 
 	count = 0;
-	e = 0;
-	while (s[e])
+	i = 0;
+	while (s[i])
 	{
-		if (s[e] != c)
+		if (s[i] != c)
 		{
 			count++;
-			while (s[e] && s[e] != c)
-				e++;
+			while (s[i] && s[i] != c)
+				i++;
 		}
 		else
-			e++;
+			i++;
 	}
 	return (count);
 }
